@@ -5,7 +5,7 @@
         public string Name;
         public int Level;
         
-        public int MinedAmount;
+        public int MiningPerTimeAmount;
         public float TimeBetweenMining;
     }
 }

@@ -48,7 +48,7 @@ namespace Learning.Miners
                     continue;
                 }
 
-                _score.Value += pair.Value.MinedAmount;
+                _score.Value += pair.Value.MiningPerTimeAmount;
                 PassedTimesOfEntities[pair.Key] = 0;
             }
         }
