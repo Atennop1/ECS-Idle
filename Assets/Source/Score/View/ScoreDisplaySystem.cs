@@ -1,14 +1,13 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Leopotam.EcsLite;
 
 namespace Learning.Score
 {
     public sealed class ScoreDisplaySystem : IEcsRunSystem
     {
-        [NotNull] private readonly IScoreView _scoreView;
+        private readonly IScoreView _scoreView;
 
-        public ScoreDisplaySystem([NotNull] IScoreView scoreView) 
+        public ScoreDisplaySystem(IScoreView scoreView) 
             => _scoreView = scoreView ?? throw new ArgumentNullException(nameof(scoreView));
 
         public void Run(IEcsSystems systems)
