@@ -8,6 +8,6 @@ namespace Learning.Score
         [SerializeField] private TMP_Text _valueText;
 
         public void Display(int score) 
-            => _valueText.text = score.ToString();
+            => _valueText.text = $"Score: {score.ToString()}";
     }
 }

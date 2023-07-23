@@ -1,21 +1,23 @@
 using Learning.Score;
 using Leopotam.EcsLite;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Learning.EntryPoint
 {
-    public sealed class Game : MonoBehaviour
+    public sealed class Game : SerializedMonoBehaviour
     {
         [SerializeField] private IScoreFactory _scoreFactory;
-        
+
+        private EcsWorld _ecsWorld;
         private IEcsSystems _ecsSystems;
         private IEcsSystems _fixedEcsSystems;
         
         private void Awake()
         {
-            var world = new EcsWorld();
-            _ecsSystems = new EcsSystems(world);
-            _fixedEcsSystems = new EcsSystems(world);
+            _ecsWorld = new EcsWorld();
+            _ecsSystems = new EcsSystems(_ecsWorld);
+            _fixedEcsSystems = new EcsSystems(_ecsWorld);
 
             _scoreFactory.Create(_ecsSystems);
             
@@ -28,5 +30,12 @@ namespace Learning.EntryPoint
 
         private void FixedUpdate()
             => _fixedEcsSystems.Run();
+
+        private void OnDestroy()
+        {
+            _ecsSystems.Destroy();
+            _fixedEcsSystems.Destroy();
+            _ecsWorld.Destroy();
+        }
     }
 }
