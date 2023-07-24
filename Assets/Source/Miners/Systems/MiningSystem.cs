@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Learning.Tools;
-using Leopotam.EcsLite;
+﻿using Leopotam.EcsLite;
 using UnityEngine;
 
 namespace Learning.Miners

@@ -4,11 +4,11 @@ using Leopotam.EcsLite;
 
 namespace Learning.Miners
 {
-    public sealed class DisplayMinersSystem : IEcsRunSystem
+    public sealed class MinersDisplaySystem : IEcsRunSystem
     {
         private readonly List<IMinerView> _minersViews;
 
-        public DisplayMinersSystem(List<IMinerView> minersViews) 
+        public MinersDisplaySystem(List<IMinerView> minersViews) 
             => _minersViews = minersViews ?? throw new ArgumentNullException(nameof(minersViews));
 
         public void Run(IEcsSystems systems)

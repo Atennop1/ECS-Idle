@@ -28,7 +28,7 @@ namespace Learning.Miners
             }
 
             systems.Add(new MiningSystem());
-            systems.Add(new DisplayMinersSystem(_minersViews));
+            systems.Add(new MinersDisplaySystem(_minersViews));
 
             return miners;
         }
