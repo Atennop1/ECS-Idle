@@ -5,12 +5,12 @@ using Leopotam.EcsLite;
 
 namespace Learning.Miners
 {
-    public sealed class DisplayMinerSystem : IEcsRunSystem
+    public sealed class DisplayMinersSystem : IEcsRunSystem
     {
-        private readonly List<IMinerView> _minerViews;
+        private readonly List<IMinerView> _minersViews;
 
-        public DisplayMinerSystem(List<IMinerView> minerViews) 
-            => _minerViews = minerViews ?? throw new ArgumentNullException(nameof(minerViews));
+        public DisplayMinersSystem(List<IMinerView> minersViews) 
+            => _minersViews = minersViews ?? throw new ArgumentNullException(nameof(minersViews));
 
         public void Run(IEcsSystems systems)
         {
@@ -21,7 +21,7 @@ namespace Learning.Miners
             var miners = filter.GetEntities(pool);
             
             for (var i = 0; i < miners.Count; i++)
-                _minerViews[i].Display(miners[i]);
+                _minersViews[i].Display(miners[i]);
         }
     }
 }
