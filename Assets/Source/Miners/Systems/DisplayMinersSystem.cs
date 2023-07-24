@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Learning.Tools;
 using Leopotam.EcsLite;
 
 namespace Learning.Miners
@@ -18,10 +17,13 @@ namespace Learning.Miners
 
             var pool = world.GetPool<Miner>();
             var filter = world.Filter<Miner>().End();
-            var miners = filter.GetEntities(pool);
-            
-            for (var i = 0; i < miners.Count; i++)
-                _minersViews[i].Display(miners[i]);
+
+            var counter = 0;
+            foreach (var entity in filter)
+            {
+                _minersViews[counter].Display(pool.Get(entity));
+                counter++;
+            }
         }
     }
 }

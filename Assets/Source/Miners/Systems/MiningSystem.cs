@@ -1,4 +1,5 @@
-﻿using Learning.Tools;
+﻿using System.Collections.Generic;
+using Learning.Tools;
 using Leopotam.EcsLite;
 using UnityEngine;
 
@@ -12,24 +13,23 @@ namespace Learning.Miners
             
             var scorePool = world.GetPool<Score.Score>();
             var scoreFilter = world.Filter<Score.Score>().End();
-            var score = scoreFilter.GetEntities(scorePool)[0];
-            
+
             var minersPool = world.GetPool<Miner>();
             var minersFilter = world.Filter<Miner>().End();
-            var miners = minersFilter.GetEntities(minersPool);
 
-            for (var i = 0; i < miners.Count; i++)
+            foreach (var minerEntity in minersFilter)
             {
-                var valueMiner = miners[i];
-                ref var miner = ref valueMiner;
-
-                if (miner.PassedTime > miner.TimeBetweenMining)
+                ref var miner = ref minersPool.Get(minerEntity);
+                
+                if (miner.PassedTime < miner.TimeBetweenMining)
                 {
                     miner.PassedTime += Time.deltaTime;
                     continue;
                 }
-
-                score.Value += miner.MiningPerTimeAmount;
+                
+                foreach (var scoreEntity in scoreFilter) 
+                    scorePool.Get(scoreEntity).Value += miner.MiningPerTimeAmount;
+                
                 miner.PassedTime = 0;
             }
         }
