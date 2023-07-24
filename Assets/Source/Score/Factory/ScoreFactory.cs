@@ -16,7 +16,6 @@ namespace Learning.Score
         {
             var ecsWorld = systems.GetWorld();
             var entity = ecsWorld.NewEntity();
-            var packedEntity = ecsWorld.PackEntity(entity);
             
             var pool = ecsWorld.GetPool<Score>();
             pool.Add(entity);
@@ -25,9 +24,9 @@ namespace Learning.Score
             if (saveStorage.HasSave())
                 pool.Get(entity).Value = saveStorage.Load();
             
-            systems.Add(new ScoreAddingSystem(_addingButton, ref packedEntity));
-            systems.Add(new ScoreDisplaySystem(_scoreView, ref packedEntity));
-            systems.Add(new ScoreSavingSystem(saveStorage, ref packedEntity));
+            systems.Add(new ScoreAddingSystem(_addingButton));
+            systems.Add(new ScoreDisplaySystem(_scoreView));
+            systems.Add(new ScoreSavingSystem(saveStorage));
 
             return ref pool.Get(entity);
         }

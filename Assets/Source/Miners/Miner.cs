@@ -7,5 +7,6 @@
         
         public int MiningPerTimeAmount;
         public float TimeBetweenMining;
+        public float PassedTime;
     }
 }

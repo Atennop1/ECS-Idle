@@ -2,6 +2,6 @@
 {
     public interface IMinerView
     {
-        void Display(Miner miner, float passedTime);
+        void Display(Miner miner);
     }
 }

@@ -10,10 +10,10 @@ namespace Learning.Miners
         [SerializeField] private Slider _progressSlider;
         [SerializeField] private TMP_Text _miningPerTimeAmountText;
         
-        public void Display(Miner miner, float passedTime)
+        public void Display(Miner miner)
         {
             _nameText.text = $"{miner.Name}, Уровень {miner.Level}";
-            _progressSlider.value = passedTime / miner.TimeBetweenMining;
+            _progressSlider.value = miner.PassedTime / miner.TimeBetweenMining;
             _miningPerTimeAmountText.text = miner.MiningPerTimeAmount.ToString();
         }
     }

@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using Learning.Tools;
 using Leopotam.EcsLite;
 
 namespace Learning.Miners
 {
     public sealed class DisplayMinerSystem : IEcsRunSystem
     {
-        private readonly Dictionary<EcsPackedEntity, IMinerView> _viewsOfMinerEntities;
+        private readonly List<IMinerView> _minerViews;
 
-        public DisplayMinerSystem(Dictionary<EcsPackedEntity, IMinerView> viewsOfMinerEntities) 
-            => _viewsOfMinerEntities = viewsOfMinerEntities ?? throw new ArgumentNullException(nameof(viewsOfMinerEntities));
+        public DisplayMinerSystem(List<IMinerView> minerViews) 
+            => _minerViews = minerViews ?? throw new ArgumentNullException(nameof(minerViews));
 
         public void Run(IEcsSystems systems)
         {
-            var miningSystem = systems.GetShared<MiningSystem>();
+            var world = systems.GetWorld();
+
+            var pool = world.GetPool<Miner>();
+            var filter = world.Filter<Miner>().End();
+            var miners = filter.GetEntities(pool);
             
-            foreach (var pair in _viewsOfMinerEntities)
-                pair.Value.Display(miningSystem.MinersOfEntities[pair.Key], miningSystem.PassedTimesOfEntities[pair.Key]);
+            for (var i = 0; i < miners.Count; i++)
+                _minerViews[i].Display(miners[i]);
         }
     }
 }

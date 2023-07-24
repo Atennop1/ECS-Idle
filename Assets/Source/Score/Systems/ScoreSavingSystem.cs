@@ -7,21 +7,18 @@ namespace Learning.Score
     public sealed class ScoreSavingSystem : IEcsDestroySystem
     {
         private readonly ISaveStorage<int> _saveStorage;
-        private readonly EcsPackedEntity _ecsPackedEntity;
 
-        public ScoreSavingSystem(ISaveStorage<int> saveStorage, ref EcsPackedEntity ecsPackedEntity)
-        {
-            _saveStorage = saveStorage ?? throw new ArgumentNullException(nameof(saveStorage));
-            _ecsPackedEntity = ecsPackedEntity;
-        }
+        public ScoreSavingSystem(ISaveStorage<int> saveStorage) 
+            => _saveStorage = saveStorage ?? throw new ArgumentNullException(nameof(saveStorage));
 
         public void Destroy(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             var pool = world.GetPool<Score>();
-
-            _ecsPackedEntity.Unpack(world, out var entity);
-            _saveStorage.Save(pool.Get(entity).Value);
+            var filter = world.Filter<Score>().End();
+            
+            foreach (var entity in filter)
+                _saveStorage.Save(pool.Get(entity).Value);
         }
     }
 }
