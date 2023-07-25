@@ -9,8 +9,8 @@ namespace Learning.Miners
         {
             var world = systems.GetWorld();
             
-            var scorePool = world.GetPool<Score.Score>();
-            var scoreFilter = world.Filter<Score.Score>().End();
+            var moneyPool = world.GetPool<Money.Money>();
+            var moneyFilter = world.Filter<Money.Money>().End();
 
             var minersPool = world.GetPool<Miner>();
             var minersFilter = world.Filter<Miner>().End();
@@ -25,8 +25,8 @@ namespace Learning.Miners
                     continue;
                 }
                 
-                foreach (var scoreEntity in scoreFilter) 
-                    scorePool.Get(scoreEntity).Value += miner.MiningPerTimeAmount;
+                foreach (var moneyEntity in moneyFilter) 
+                    moneyPool.Get(moneyEntity).Value += miner.MiningPerTimeAmount;
                 
                 miner.PassedMiningTime = 0;
             }

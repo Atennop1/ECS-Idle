@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Learning.Score
+namespace Learning.Money
 {
-    public struct Score
+    public struct Money
     {
         private int _value;
         

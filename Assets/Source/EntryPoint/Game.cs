@@ -1,5 +1,5 @@
 using Learning.Miners;
-using Learning.Score;
+using Learning.Money;
 using Leopotam.EcsLite;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -8,7 +8,7 @@ namespace Learning.EntryPoint
 {
     public sealed class Game : SerializedMonoBehaviour
     {
-        [SerializeField] private IScoreFactory _scoreFactory;
+        [SerializeField] private IMoneyFactory _moneyFactory;
         [SerializeField] private MinersFactory _minersFactory;
 
         private EcsWorld _ecsWorld;
@@ -21,7 +21,7 @@ namespace Learning.EntryPoint
             _ecsSystems = new EcsSystems(_ecsWorld);
             _fixedEcsSystems = new EcsSystems(_ecsWorld);
 
-            _scoreFactory.Create(_ecsSystems);
+            _moneyFactory.Create(_ecsSystems);
             _minersFactory.Create(_ecsSystems);
             
             _ecsSystems.Init();

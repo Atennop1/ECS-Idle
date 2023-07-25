@@ -7,7 +7,7 @@ namespace Learning.Miners
     {
         public string Name;
         public int Level;
-        
+
         public int MiningPerTimeAmount;
         public float TimeBetweenMining;
         public float PassedMiningTime;
