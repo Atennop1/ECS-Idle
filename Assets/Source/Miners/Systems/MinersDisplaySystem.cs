@@ -24,6 +24,12 @@ namespace Learning.Miners
                 _minersViews[counter].Display(pool.Get(entity));
                 counter++;
             }
+
+            if (_minersViews.Count <= counter) 
+                return;
+
+            for (var i = 0; i < _minersViews.Count - counter; i++) 
+                _minersViews[_minersViews.Count - i - 1].Disable();
         }
     }
 }

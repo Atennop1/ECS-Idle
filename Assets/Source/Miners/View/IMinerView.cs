@@ -3,5 +3,6 @@
     public interface IMinerView
     {
         void Display(Miner miner);
+        void Disable();
     }
 }

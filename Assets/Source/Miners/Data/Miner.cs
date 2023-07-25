@@ -1,5 +1,8 @@
-﻿namespace Learning.Miners
+﻿using System;
+
+namespace Learning.Miners
 {
+    [Serializable]
     public struct Miner
     {
         public string Name;
@@ -7,6 +10,6 @@
         
         public int MiningPerTimeAmount;
         public float TimeBetweenMining;
-        public float PassedTime;
+        public float PassedMiningTime;
     }
 }

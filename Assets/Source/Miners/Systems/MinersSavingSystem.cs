@@ -7,10 +7,10 @@ namespace Learning.Miners
 {
     public sealed class MinersSavingSystem : IEcsDestroySystem
     {
-        private readonly ISaveStorage<List<Miner>> _saveStorage;
+        private readonly ISaveStorage<List<Miner>> _minersStorage;
 
-        public MinersSavingSystem(ISaveStorage<List<Miner>> saveStorage) 
-            => _saveStorage = saveStorage ?? throw new ArgumentNullException(nameof(saveStorage));
+        public MinersSavingSystem(ISaveStorage<List<Miner>> minersStorage) 
+            => _minersStorage = minersStorage ?? throw new ArgumentNullException(nameof(minersStorage));
         
         public void Destroy(IEcsSystems systems)
         {
@@ -18,11 +18,11 @@ namespace Learning.Miners
             var pool = world.GetPool<Miner>();
             var filter = world.Filter<Miner>().End();
 
-            var result = new List<Miner>(filter.GetEntitiesCount());
+            var miners = new List<Miner>(filter.GetEntitiesCount());
             foreach (var entity in filter)
-                result.Add(pool.Get(entity));
+                miners.Add(pool.Get(entity));
             
-            _saveStorage.Save(result);
+            _minersStorage.Save(miners);
         }
     }
 }

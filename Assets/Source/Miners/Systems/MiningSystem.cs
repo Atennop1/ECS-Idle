@@ -19,16 +19,16 @@ namespace Learning.Miners
             {
                 ref var miner = ref minersPool.Get(minerEntity);
                 
-                if (miner.PassedTime < miner.TimeBetweenMining)
+                if (miner.PassedMiningTime < miner.TimeBetweenMining)
                 {
-                    miner.PassedTime += Time.deltaTime;
+                    miner.PassedMiningTime += Time.deltaTime;
                     continue;
                 }
                 
                 foreach (var scoreEntity in scoreFilter) 
                     scorePool.Get(scoreEntity).Value += miner.MiningPerTimeAmount;
                 
-                miner.PassedTime = 0;
+                miner.PassedMiningTime = 0;
             }
         }
     }

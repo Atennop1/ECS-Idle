@@ -20,7 +20,7 @@ namespace Learning.Score
             var pool = ecsWorld.GetPool<Score>();
             pool.Add(entity);
             
-            var saveStorage = new BinaryStorage<int>(new Path("Score.json"));
+            var saveStorage = new BinaryStorage<int>(new Path("Score.save"));
             if (saveStorage.HasSave())
                 pool.Get(entity).Value = saveStorage.Load();
             

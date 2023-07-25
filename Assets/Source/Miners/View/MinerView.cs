@@ -19,7 +19,10 @@ namespace Learning.Miners
             _levelText.text = $"Уровень {miner.Level}";
             
             _miningPerTimeAmountText.text = $"{miner.MiningPerTimeAmount.ToString()}/c";
-            _progressSlider.value = miner.PassedTime / miner.TimeBetweenMining;
+            _progressSlider.value = miner.PassedMiningTime / miner.TimeBetweenMining;
         }
+
+        public void Disable() 
+            => gameObject.SetActive(false);
     }
 }
