@@ -19,6 +19,10 @@ In the game itself, a money system, automatic miners and saves for all this were
 - The shortest project in terms of development time
 - The first project that was stopped due to the wrong architecture
 
+### Tools
+- LeoECS
+- TMP
+
 ## Conclusion
 
 This project helped me gain a basic knowledge of the ECS approach, which I have been avoiding a lot because I like OOP. I also realized that you should not go too far in mixing OOP and ECS, because this will only lead to unnecessary complexity of the system, because ECS is a DOD approach, but OOP is not.
